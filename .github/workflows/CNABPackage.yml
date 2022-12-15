@@ -1,0 +1,42 @@
+name: CNAB Packaging and Publish
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+      id-token: write
+      contents: read
+         
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/container-package-app:latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # This is required as github actions by default updates the home path, this will update to the path where the porter tool is installed.
+      - name: Update Home Path
+        run: 'echo HOME=/root | tee -a $GITHUB_ENV'
+        
+      # This is leveraging OIDC to login
+      - name: OIDC Login to Azure Public Cloud
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }} 
+          
+      # Logging in to Azure Container Registry
+      - name: Log into ACR
+        run: az acr login -n ${{ secrets.AZURE_ACR }}       
+        
+      # Build and publish using the container package app tool
+      - name: Build and Publish Bundle
+        run: cpa buildbundle

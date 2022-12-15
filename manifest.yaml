@@ -1,0 +1,11 @@
+applicationName: Linkerd
+publisher: "Buoyant Inc"
+description: "Install the Linkerd Service mesh for Kubernetes"
+version: 2.12.2 #Must be semver
+helmChart: "./charts/linkerd"
+clusterArmTemplate: "./mainTemplate.json"
+uiDefinition: "./createUIDefinition.json"
+registryServer: "buoyant.azurecr.io"
+extensionRegistrationParameters:
+  defaultScope: "cluster"
+  namespace: "linkerd"

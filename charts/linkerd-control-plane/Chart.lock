@@ -1,0 +1,9 @@
+dependencies:
+- name: partials
+  repository: file://./charts/partials
+  version: 0.1.0
+- name: linkerd-crds
+  repository: file://./charts/linkerd-crds
+  version: 1.4.0
+digest: sha256:496ea5154c334c4f595228ac0ccec7ab515ac506d02035cd3350b55acc5e773d
+generated: "2022-12-13T09:33:23.833617701-05:00"
