@@ -1,12 +1,12 @@
-# Minecraft Server Chats
+# Linkerd Azure Marketplace Charts
 
-This repo is designed as a template for a Microsoft Partner to create a Kubernetes App in the Azure Marketplace.
+This repo contains the Linkerd Azure marketplace item.
 
 ## Features
 
 This repo contains the following:
 
-* [Minecraft Server Helm Chart](charts/minecraft) - The sample application
+* [Linkerd Helm Chart](charts/linkerd-control-plane) - Linkerd
 * [UI Definition](createUIDefinition.json) - Used to define experience when purchasing via Azure Portal
 * [ARM Template](mainTemplate.json) - Used to define the Azure resources and variables passed during deployment
 * [GitHub Action](.github/workflows) - Defines the GitHub Actions to enable CI automation of re-publishing the latest bundle on commit
@@ -17,7 +17,7 @@ This repo contains the following:
 Prior to pushing the offer to the Azure Marketplace, validate the Helm install
 
 ```
-helm install ./charts/minecraft --generate-name --dry-run --debug
+helm install ./charts/linkerd-control-plane --generate-name --dry-run --debug
 ```
 
 ## GitHub Actions
